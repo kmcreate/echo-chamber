@@ -177,6 +177,7 @@ background:#111;
 .track-title{
  flex:1;
  min-width:110px;
+ font-size:13px;
 }
 
 .track-time{
@@ -557,7 +558,8 @@ player.onpause = () => {
  const duration = format(player.duration);
 
  if(time){
-  time.textContent = duration;
+  time.textContent =
+  format(player.currentTime)+" / "+format(player.duration);
  }
 
 };

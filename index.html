@@ -150,11 +150,12 @@ header p{
 }
 
 .track{
-display:flex;
-flex-direction:column;
-padding:12px;
-border-bottom:1px solid #333;
-cursor:pointer;
+ display:flex;
+ flex-direction:column;
+ padding:12px 16px;
+ border-bottom:1px solid #333;
+ border-top:none;
+ cursor:pointer;
 }
 
 .track:hover{
@@ -162,30 +163,31 @@ background:#111;
 }
 
 .track-row{
-display:flex;
-align-items:center;
-gap:10px;
+ display:flex;
+ align-items:center;
+ gap:10px;
+ cursor:pointer;
 }
 
 .track-num{
- width:28px;
+ width:20px;
  text-align:center;
- display:flex;
- justify-content:center;
- align-items:center;
 }
 
 .track-title{
-flex:1;
-min-width:110px;
+ flex:1;
+ min-width:110px;
 }
 
 .track-time{
-opacity:0.7;
-font-size:12px;
+ width:45px;
+ text-align:right;
+ font-size:12px;
+ opacity:0.7;
 }
 
 .track-progress{
+ width:100%;
 height:6px;
 background:#222;
 border-radius:6px;
@@ -283,10 +285,24 @@ animation-delay:0.4s;
 .signature{
  text-align:center;
  font-size:10px;
- opacity:0.3;
- margin-top:30px;
- letter-spacing:2px;
+ opacity:0.25;
+ margin-top:40px;
+ letter-spacing:3px;
 }
+
+.lyrics-btn{
+ width:20px;
+ text-align:right;
+ margin-left:10px;
+ font-size:13px;
+ opacity:0.5;
+ cursor:pointer;
+}
+
+.lyrics-btn:hover{
+ opacity:1;
+}
+
 
 </style>
 </head>
@@ -303,7 +319,8 @@ animation-delay:0.4s;
 </div>
 
 <div class="play-guide">
-▶ 曲名タップで再生 / 再度タップで停止
+▶ 曲名タップで再生 / 再度タップで停止<br>
+📄タップで歌詞が見れます
 </div>
 
 <div class="container">
@@ -311,15 +328,23 @@ animation-delay:0.4s;
 <div class="album-tracks">
 
 <div class="track" data-audio="song1.mp3">
-<div class="track-row">
-<span class="track-num">1</span>
-<span class="track-title">声の灯り <small>~ Female Vocal ~</small></span>
-<span class="track-time">4:18</span>
-</div>
+  <div class="track-row">
+    <span class="track-num">1</span>
 
-<div class="track-progress">
-<div class="track-bar"></div>
-</div>
+    <span class="track-title">
+      声の灯り <small>~ Female Vocal ~</small>
+    </span>
+
+    <span class="track-time">4:18</span>
+
+    <span class="lyrics-btn" onclick="event.stopPropagation(); location.href='lyrics1.html'">
+      📄
+    </span>
+  </div>
+
+  <div class="track-progress">
+    <div class="track-bar"></div>
+  </div>
 </div>
 
 
@@ -328,7 +353,10 @@ animation-delay:0.4s;
 <span class="track-num">2</span>
 <span class="track-title">声の灯り <small>~ Male Vocal ~</small></span>
 <span class="track-time">4:04</span>
-</div>
+<span class="lyrics-btn" onclick="event.stopPropagation(); location.href='lyrics2.html'">
+      📄
+    </span>
+  </div>
 
 <div class="track-progress">
 <div class="track-bar"></div>
@@ -341,7 +369,10 @@ animation-delay:0.4s;
 <span class="track-num">3</span>
 <span class="track-title">今日もここで <small>~ pop ver ~</small></span>
 <span class="track-time">3:54</span>
-</div>
+<span class="lyrics-btn" onclick="event.stopPropagation(); location.href='lyrics3.html'">
+      📄
+    </span>
+  </div>
 
 <div class="track-progress">
 <div class="track-bar"></div>
@@ -354,7 +385,10 @@ animation-delay:0.4s;
 <span class="track-num">4</span>
 <span class="track-title">今日もここで <small>~ ballade ver ~</small></span>
 <span class="track-time">3:49</span>
-</div>
+<span class="lyrics-btn" onclick="event.stopPropagation(); location.href='lyrics4.html'">
+      📄
+    </span>
+  </div>
 
 <div class="track-progress">
 <div class="track-bar"></div>
@@ -367,20 +401,18 @@ animation-delay:0.4s;
 <span class="track-num">5</span>
 <span class="track-title">See You <small>~ for kupi ~</small></span>
 <span class="track-time">4:03</span>
-</div>
+<span class="lyrics-btn" onclick="event.stopPropagation(); location.href='lyrics5.html'">
+      📄
+    </span>
+  </div>
 
 <div class="track-progress">
 <div class="track-bar"></div>
 </div>
 </div>
 
-<audio id="player"></audio>
-
-</div>
-</div>
-
 <div class="signature">echo chamber</div>
-
+<audio id="player"></audio>
 <script>
 const tracks = [
  {title:"声が届くまで – Create 1", file:"song1.mp3", scroll:258},
@@ -492,11 +524,6 @@ if ("mediaSession" in navigator) {
  }
 
 };
-
-
- scroll();
-
-
 
 player.addEventListener("timeupdate",()=>{
 

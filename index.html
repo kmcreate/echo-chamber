@@ -693,11 +693,10 @@ document.querySelectorAll(".like").forEach(btn=>{
 });
 
 
-// ページ開いたとき（読み込み）
+/*
 fetch(GAS_URL)
 .then(res=>res.text())
 .then(text=>{
-
   const data = JSON.parse(text);
 
   document.querySelectorAll(".like").forEach(btn=>{
@@ -708,8 +707,8 @@ fetch(GAS_URL)
       countEl.textContent = data[song];
     }
   });
-
 });
+*/
 
 </script>
 

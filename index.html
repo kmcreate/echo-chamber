@@ -773,6 +773,7 @@ function vote(song, btn){
 
    fetch(GAS_URL, {
     method:"POST",
+    mode: "no-cors",
     body:new URLSearchParams({ song:song })
   });
 

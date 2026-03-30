@@ -353,10 +353,6 @@ animation-delay:0.4s;
     <span class="lyrics-btn" data-lyrics="lyrics1.html">📄</span>
     </span>
 
-    <div class="like" data-song="song1">
-      👍 <span class="like-count">0</span>
-    </div>
-
   </div>
 
   <div class="track-progress">
@@ -375,10 +371,6 @@ animation-delay:0.4s;
       📄
     </span>
 
-    <div class="like" data-song="song2">
-      👍 <span class="like-count">0</span>
-    </div>
-
   </div>
 
 <div class="track-progress">
@@ -394,10 +386,6 @@ animation-delay:0.4s;
 <span class="lyrics-btn" onclick="event.stopPropagation(); location.href='lyrics3.html'">
       📄
     </span>
-
-    <div class="like" data-song="song3">
-      👍 <span class="like-count">0</span>
-    </div>
 
   </div>
 
@@ -416,10 +404,6 @@ animation-delay:0.4s;
       📄
     </span>
 
-    <div class="like" data-song="song4">
-      👍 <span class="like-count">0</span>
-    </div>
-
   </div>
 
 <div class="track-progress">
@@ -437,9 +421,6 @@ animation-delay:0.4s;
       📄
     </span>
 
-    <div class="like" data-song="song5">
-      👍 <span class="like-count">0</span>
-    </div>
 
   </div>
 
@@ -456,10 +437,6 @@ animation-delay:0.4s;
 <span class="lyrics-btn" onclick="event.stopPropagation(); location.href='lyrics6.html'">
       📄
     </span>
-
-    <div class="like" data-song="song6">
-      👍 <span class="like-count">0</span>
-    </div>
 
   </div>
 
@@ -694,47 +671,6 @@ document.getElementById("lyricsModal").addEventListener("click",()=>{
 });
 
 
-const GAS_URL = "https://script.google.com/macros/s/AKfycbwKKC2D1d3HHyyqcJaM3FoXbbfJhkZIQMfySr8jmYCy-LYMAeEdeeIlcuaLD_AkGhQ/exec";
-
-
-// 👍押したとき
-document.querySelectorAll(".like").forEach(btn=>{
-
-  btn.addEventListener("click", (e)=>{
-  e.stopPropagation(); // ←これ追加！
-
-    const song = btn.dataset.song;
-
-    fetch(GAS_URL, {
-      method: "POST",
-      body: new URLSearchParams({ song: song })
-    });
-
-    // 即反映（仮）
-    const countEl = btn.querySelector(".like-count");
-    countEl.textContent = Number(countEl.textContent) + 1;
-
-  });
-
-});
-
-
-/*
-fetch(GAS_URL)
-.then(res=>res.text())
-.then(text=>{
-  const data = JSON.parse(text);
-
-  document.querySelectorAll(".like").forEach(btn=>{
-    const song = btn.dataset.song;
-    const countEl = btn.querySelector(".like-count");
-
-    if(data[song]){
-      countEl.textContent = data[song];
-    }
-  });
-});
-*/
 
 </script>
 

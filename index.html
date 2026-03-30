@@ -771,7 +771,10 @@ const GAS_URL = "https://script.google.com/macros/s/AKfycbzd-JKjW1nYCbOSzGfLZvzK
 
 function vote(song, btn){
 
-  fetch(GAS_URL + "?song=" + song);
+   fetch(GAS_URL, {
+    method:"POST",
+    body:new URLSearchParams({ song:song })
+  });
 
   // 即反映
   const countEl = btn.querySelector(".count");

@@ -678,6 +678,10 @@ document.querySelectorAll(".lyrics-btn").forEach(btn=>{
     .then(html=>{
       document.getElementById("lyricsContent").innerHTML = html;
       document.getElementById("lyricsModal").style.display = "block";
+
+    // 👇これ追加
+    history.pushState({ modal: true }, "", "#lyrics");
+
     });
 
   });

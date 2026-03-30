@@ -668,7 +668,7 @@ if("mediaSession" in navigator){
 }
 
 
-const GAS_URL = "https://script.google.com/macros/s/AKfycbxEOCNV5O272HgKSWxTHUXgeeb7_AKWf0DU6ZjmVvtAasNrY29bmhSNJ4aeCnFh19I/exec";
+const GAS_URL = "https://script.google.com/macros/s/AKfycbwKKC2D1d3HHyyqcJaM3FoXbbfJhkZIQMfySr8jmYCy-LYMAeEdeeIlcuaLD_AkGhQ/exec";
 
 
 // 👍押したとき
@@ -695,8 +695,10 @@ document.querySelectorAll(".like").forEach(btn=>{
 
 // ページ開いたとき（読み込み）
 fetch(GAS_URL)
-.then(res=>res.json())
-.then(data=>{
+.then(res=>res.text())
+.then(text=>{
+
+  const data = JSON.parse(text);
 
   document.querySelectorAll(".like").forEach(btn=>{
     const song = btn.dataset.song;
@@ -708,7 +710,6 @@ fetch(GAS_URL)
   });
 
 });
-
 
 </script>
 

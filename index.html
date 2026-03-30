@@ -750,7 +750,8 @@ document.querySelectorAll(".lyrics-btn").forEach(btn=>{
 });
 
 // 閉じる（どこでもタップ）
-document.getElementById("lyricsModal").addEventListener("click",()=>{
+document.getElementById("lyricsModal").addEventListener("click",(e)=>{
+  e.stopPropagation(); // ←これ追加
   document.getElementById("lyricsModal").style.display = "none";
 });
 

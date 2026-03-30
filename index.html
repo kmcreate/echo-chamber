@@ -767,12 +767,13 @@ function vote(song, btn){
 }
 
 
-const GAS_URL = "https://script.google.com/macros/s/AKfycbwwmE38x7aGzFumbtbk1uAqZ-yeZxqLzlWilrQd5-nSYEwxC_OI-GgRVqlb_avFbv8/exec";
+const GAS_URL = "https://script.google.com/macros/s/AKfycbwuGfMlDG4MzCm9iQ_ysdhR37iy_X0OJS-6nP-PhNr0cg2y_lZfJjqDBT0l4coTh3U/exec";
 
 function vote(song, btn){
 
   fetch(GAS_URL, {
     method:"POST",
+    mode: "no-cors",
     body:new URLSearchParams({ song:song })
   });
 

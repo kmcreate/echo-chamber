@@ -350,9 +350,8 @@ animation-delay:0.4s;
 
     <span class="track-time">4:18</span>
 
-    <span class="lyrics-btn" data-url="lyrics1.html">
-  📄
-</span>
+    <span class="lyrics-btn" data-lyrics="lyrics1.html">📄</span>
+    </span>
 
     <div class="like" data-song="song1">
       👍 <span class="like-count">0</span>
@@ -487,7 +486,9 @@ const tracks = [
 
 
 </script>
-
+<div id="lyricsModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; color:#fff; z-index:9999; overflow:auto; padding:20px;">
+  <div id="lyricsContent"></div>
+</div>
 <script>
 
 const player = document.getElementById("player");
@@ -667,19 +668,27 @@ if("mediaSession" in navigator){
 
 }
 
-// 歌詞ボタン
 document.querySelectorAll(".lyrics-btn").forEach(btn=>{
 
-  btn.addEventListener("click", (e)=>{
-
+  btn.addEventListener("click",(e)=>{
     e.stopPropagation();
 
-    const url = btn.dataset.url;
-    location.href = url;
+    fetch(btn.dataset.lyrics)
+    .then(res=>res.text())
+    .then(html=>{
+      document.getElementById("lyricsContent").innerHTML = html;
+      document.getElementById("lyricsModal").style.display = "block";
+    });
 
   });
 
 });
+
+// 閉じる（どこでもタップ）
+document.getElementById("lyricsModal").addEventListener("click",()=>{
+  document.getElementById("lyricsModal").style.display = "none";
+});
+
 
 const GAS_URL = "https://script.google.com/macros/s/AKfycbwKKC2D1d3HHyyqcJaM3FoXbbfJhkZIQMfySr8jmYCy-LYMAeEdeeIlcuaLD_AkGhQ/exec";
 

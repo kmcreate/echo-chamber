@@ -667,6 +667,19 @@ if("mediaSession" in navigator){
 
 }
 
+// 歌詞ボタン
+document.querySelectorAll(".lyrics-btn").forEach(btn=>{
+
+  btn.addEventListener("click", (e)=>{
+
+    e.stopPropagation();
+
+    const url = btn.dataset.url;
+    location.href = url;
+
+  });
+
+});
 
 const GAS_URL = "https://script.google.com/macros/s/AKfycbwKKC2D1d3HHyyqcJaM3FoXbbfJhkZIQMfySr8jmYCy-LYMAeEdeeIlcuaLD_AkGhQ/exec";
 

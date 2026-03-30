@@ -309,12 +309,67 @@ animation-delay:0.4s;
  opacity:1;
 }
 
-.like{
-  font-size:11px;   /* ←小さくする */
-  opacity:0.7;      /* ←少し薄く */
+.vote{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:10px;
+  width:100%;
+  max-width:500px;
+  margin:15px auto; /* ←これ超重要 */
+}
+
+.vote p{
+  margin-bottom:15px;
+  font-size:10px;
+  color:#ccc;
+}
+
+.vote button{
   display:flex;
+  justify-content:space-between;
   align-items:center;
-  gap:3px;          /* 👍と数字の間 */
+  gap:10px;
+
+  width:100%;
+  padding:10px 12px;
+
+  background:#111;       /* ←黒に戻す */
+  color:#fff;
+  border:1px solid #333;
+  border-radius:8px;
+}
+
+/* 曲名 */
+.vote .title{
+  font-size:12px;
+  line-height:1.4;
+  text-align:left;
+
+  white-space:normal;   /* ←改行OK */
+  word-break:break-word;
+
+  flex:1;
+}
+
+/* 数字 */
+.vote .count{
+  font-size:13px;
+  opacity:0.7;
+  flex-shrink:0;
+}
+
+.container{
+  display:flex;
+  justify-content:center;
+}
+
+.vote button:hover{
+  background:#222;
+  border-color:#555;
+}
+
+.vote button:active{
+  transform:scale(0.95);
 }
 
 </style>
@@ -447,8 +502,37 @@ animation-delay:0.4s;
 
 <div class="play-guide">
 いいなぁって思う曲があれば<br>
-👍タップお願いします
+下の曲番号をタップお願いします
 </div>
+
+<div class="vote">
+<button onclick="vote('1', this)">
+  <span class="title">1. 声の灯り（techico）</span>
+  <span class="count">0</span>
+</button>
+<button onclick="vote('2', this)">
+  <span class="title">2. 声の灯り（Male）</span>
+  <span class="count">0</span>
+</button>
+<button onclick="vote('3', this)">
+  <span class="title">3. 今日もここで（kupi）</span>
+  <span class="count">0</span>
+</button>
+<button onclick="vote('4', this)">
+  <span class="title">4. 今日もここで（Male）</span>
+  <span class="count">0</span>
+</button>
+<button onclick="vote('5', this)">
+  <span class="title">5. See You（kupi）</span>
+  <span class="count">0</span>
+</button>
+<button onclick="vote('6', this)">
+  <span class="title">6. 声が届くまで（kupi）</span>
+  <span class="count">0</span>
+</button>
+ <p id="voteResult"></p>
+</div>
+
 
 <div class="signature">echo chamber</div>
 <audio id="player"></audio>
@@ -670,7 +754,47 @@ document.getElementById("lyricsModal").addEventListener("click",()=>{
   document.getElementById("lyricsModal").style.display = "none";
 });
 
+function vote(song, btn){
 
+  fetch(GAS_URL, {
+    method:"POST",
+    body:new URLSearchParams({ song:song })
+  });
+
+  // 即反映（見た目）
+  const countEl = btn.querySelector(".count");
+  countEl.textContent = Number(countEl.textContent) + 1;
+}
+
+
+const GAS_URL = "https://script.google.com/macros/s/AKfycbwe_1nbMfLPCk7OnRiEQ3cY27hWu3UEh5cfIz6OrFskKMKv5tUnEhmLdUxS_fEUc30/exec";
+
+function vote(song, btn){
+
+  fetch(GAS_URL, {
+    method:"POST",
+    body:new URLSearchParams({ song:song })
+  });
+
+  // 即反映
+  const countEl = btn.querySelector(".count");
+  countEl.textContent = Number(countEl.textContent) + 1;
+}
+
+fetch(GAS_URL)
+.then(res=>res.text())
+.then(text=>{
+  const data = JSON.parse(text);
+
+  document.querySelectorAll(".vote button").forEach(btn=>{
+    const song = btn.getAttribute("onclick").match(/'(.+?)'/)[1];
+    const countEl = btn.querySelector(".count");
+
+    if(data[song]){
+      countEl.textContent = data[song];
+    }
+  });
+});
 
 </script>
 

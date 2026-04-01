@@ -500,6 +500,41 @@ animation-delay:0.4s;
 </div>
 </div>
 
+<div class="track" data-audio="song7.mp3">
+<div class="track-row">
+<span class="track-num">7</span>
+<span class="track-title">この場所で… <small>~ for kupi ~</small></span>
+<span class="track-time">3:57</span>
+<span class="lyrics-btn" onclick="event.stopPropagation(); location.href='lyrics7.html'">
+      📄
+    </span>
+
+
+  </div>
+
+<div class="track-progress">
+<div class="track-bar"></div>
+</div>
+</div>
+
+<div class="track" data-audio="song8.mp3">
+<div class="track-row">
+<span class="track-num">8</span>
+<span class="track-title">ここにいるよ… <small>~ Male Vocal ~</small></span>
+<span class="track-time">4:07</span>
+<span class="lyrics-btn" onclick="event.stopPropagation(); location.href='lyrics8.html'">
+      📄
+    </span>
+
+
+  </div>
+
+<div class="track-progress">
+<div class="track-bar"></div>
+</div>
+</div>
+
+
 <div class="play-guide">
 あなたの心にグッときた曲があれば<br>
 下の曲番号をタップしてね！
@@ -528,6 +563,14 @@ animation-delay:0.4s;
 </button>
 <button onclick="vote('6', this)">
   <span class="title">6. 声が届くまで（kupi）</span>
+  <span class="count">0</span>
+</button>
+<button onclick="vote('7', this)">
+  <span class="title">7. この場所で…（kupi）</span>
+  <span class="count">0</span>
+</button>
+<button onclick="vote('8', this)">
+  <span class="title">8. ここにいるよ…（Male）</span>
   <span class="count">0</span>
 </button>
  <p id="voteResult"></p>

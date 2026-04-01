@@ -406,7 +406,6 @@ animation-delay:0.4s;
     <span class="track-time">4:18</span>
 
     <span class="lyrics-btn" data-lyrics="lyrics1.html">📄</span>
-    </span>
 
   </div>
 
@@ -422,9 +421,7 @@ animation-delay:0.4s;
 <span class="track-num">2</span>
 <span class="track-title">声の灯り <small>~ Male Vocal ~</small></span>
 <span class="track-time">4:04</span>
-<span class="lyrics-btn" onclick="event.stopPropagation(); location.href='lyrics2.html'">
-      📄
-    </span>
+<span class="lyrics-btn" data-lyrics="lyrics2.html">📄</span>
 
   </div>
 
@@ -438,9 +435,7 @@ animation-delay:0.4s;
 <span class="track-num">3</span>
 <span class="track-title">今日もここで <small>~ for kupi ~</small></span>
 <span class="track-time">3:54</span>
-<span class="lyrics-btn" onclick="event.stopPropagation(); location.href='lyrics3.html'">
-      📄
-    </span>
+<span class="lyrics-btn" data-lyrics="lyrics3.html">📄</span>
 
   </div>
 
@@ -455,9 +450,7 @@ animation-delay:0.4s;
 <span class="track-num">4</span>
 <span class="track-title">今日もここで <small>~ ballade ver ~</small></span>
 <span class="track-time">3:49</span>
-<span class="lyrics-btn" onclick="event.stopPropagation(); location.href='lyrics4.html'">
-      📄
-    </span>
+<span class="lyrics-btn" data-lyrics="lyrics4.html">📄</span>
 
   </div>
 
@@ -472,9 +465,7 @@ animation-delay:0.4s;
 <span class="track-num">5</span>
 <span class="track-title">See You <small>~ for kupi ~</small></span>
 <span class="track-time">4:03</span>
-<span class="lyrics-btn" onclick="event.stopPropagation(); location.href='lyrics5.html'">
-      📄
-    </span>
+<span class="lyrics-btn" data-lyrics="lyrics5.html">📄</span>
 
 
   </div>
@@ -489,9 +480,7 @@ animation-delay:0.4s;
 <span class="track-num">6</span>
 <span class="track-title">声が届くまで <small>~ for kupi ~</small></span>
 <span class="track-time">3:49</span>
-<span class="lyrics-btn" onclick="event.stopPropagation(); location.href='lyrics6.html'">
-      📄
-    </span>
+<span class="lyrics-btn" data-lyrics="lyrics6.html">📄</span>
 
   </div>
 
@@ -505,9 +494,7 @@ animation-delay:0.4s;
 <span class="track-num">7</span>
 <span class="track-title">この場所で… <small>~ for kupi ~</small></span>
 <span class="track-time">3:57</span>
-<span class="lyrics-btn" onclick="event.stopPropagation(); location.href='lyrics7.html'">
-      📄
-    </span>
+<span class="lyrics-btn" data-lyrics="lyrics7.html">📄</span>
 
 
   </div>
@@ -522,9 +509,7 @@ animation-delay:0.4s;
 <span class="track-num">8</span>
 <span class="track-title">ここにいるよ… <small>~ Male Vocal ~</small></span>
 <span class="track-time">4:07</span>
-<span class="lyrics-btn" onclick="event.stopPropagation(); location.href='lyrics8.html'">
-      📄
-    </span>
+<span class="lyrics-btn" data-lyrics="lyrics8.html">📄</span>
 
 
   </div>
@@ -797,6 +782,8 @@ document.getElementById("lyricsModal").addEventListener("click",(e)=>{
   e.stopPropagation(); // ←これ追加
   document.getElementById("lyricsModal").style.display = "none";
 });
+
+
 
 function vote(song, btn){
 

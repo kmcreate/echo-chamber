@@ -45,7 +45,7 @@ header p{
 .container{
   max-width:420px;
   margin:0 auto;
-  padding:15px;
+  padding:10px;
   display:grid;
   grid-template-columns:1fr;
   gap:14px;
@@ -57,29 +57,47 @@ header p{
  border-radius:10px;
  padding:8px 14px;
  border:1px solid #333;
- min-height:40px;
- margin-top:8px;
+ min-height:25px;
+ margin-top:2px;
 }
 
 /* 上段（タイトル＋アイコン） */
 .row{
- display:flex;
- flex-direction:row;   /* ←これに戻す */
- align-items:center;
- justify-content:space-between;
+  display:flex;
+  align-items:center;
+  gap:8px;
 }
 
 .title{
   font-size:12px;
   text-align:left;
   flex:1;
+  min-width:0;
   overflow:hidden;
   text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.icons{
+  display:flex;
+  align-items:center;
+  gap:6px;
 }
 
 .icons span{
- gap:6px;
- flex-shrink:0;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-shrink:0;
+}
+
+/* 時間（右下） */
+.time{
+  font-size:11px;
+  color:#aaa;
+  white-space:nowrap;
+  opacity:0.7;
+  flex-shrink:0;
 }
 
 /* ネオンバー */
@@ -105,7 +123,7 @@ header p{
   gap:6px;
   font-size:12px;
   color:#aaa;
-  margin-right:6px;
+  margin-right:1px;
 }
 
 .track.playing .track-bar{
@@ -114,18 +132,6 @@ header p{
     0 0 12px #00ffe5;
 }
 
-/* 時間（右下） */
-.time{
-  position:absolute;
-  right:0;
-  top:12px;
-  font-size:11px;
-  color:#aaa;
-  white-space:nowrap;
-  z-index:10;
-  opacity:0.7;
-  margin-top:8px;
-}
 
 /* 再生中ネオン強化 */
 .track.playing .bar{
@@ -178,7 +184,7 @@ header p{
 
 .vote-text{
  text-align:center;
- font-size:14px;
+ font-size:13px;
  opacity:0.8;
  margin:4px auto 6px auto;
  padding:8px 12px;
@@ -273,7 +279,7 @@ animation-delay:0.4s;
 </div>
 
 <div class="play-guide">
-▶ 曲名タップで再生 / 再度タップで停止<br>
+▶ 曲名タップで再生 / ■ 再度タップで停止<br>
 📄タップで歌詞が見れます
 </div>
 
@@ -289,12 +295,17 @@ animation-delay:0.4s;
 
   <!-- 1曲 -->
   <div class="track" data-audio="song1.mp3">
+
     <div class="row">
     <span class="track-num">01.</span>
-      <div class="title">声の灯り <small>~ for techico ~</small></div>
+
+    <div class="title">声の灯り <small>~ for techico ~</small></div>
+
+      <div class="time">0:00 / 4:18</div>
+
       <div class="icons">
-        <span class="lyrics-btn" data-lyrics="lyrics1.html">🗒</span>
-        <span class="like" onclick="vote('1', this)">
+      <span class="lyrics-btn" data-lyrics="lyrics1.html">🗒</span>
+      <span class="like" onclick="vote('1', this)">
     👍 <span class="count">0</span>
   </span>
       </div>
@@ -302,7 +313,6 @@ animation-delay:0.4s;
 
     <div class="progress">
       <div class="bar"></div>
-      <div class="time">0:00 / 4:18</div>
     </div>
   </div>
 
@@ -310,18 +320,21 @@ animation-delay:0.4s;
   <div class="track" data-audio="song2.mp3">
     <div class="row">
     <span class="track-num">02.</span>
-      <div class="title">声の灯り <small>~ Male Vocal ~</small></div>
-      <div class="icons">
-        <span class="lyrics-btn" data-lyrics="lyrics2.html">🗒</span>
-        <span class="like" onclick="vote('2', this)">
+
+    <div class="title">声の灯り <small>~ Male Vocal ~</small></div>
+
+    <div class="time">0:00 / 4:04</div>
+
+    <div class="icons">
+    <span class="lyrics-btn" data-lyrics="lyrics2.html">🗒</span>
+    <span class="like" onclick="vote('2', this)">
     👍 <span class="count">0</span>
   </span>
-      </div>
+    </div>
     </div>
 
     <div class="progress">
       <div class="bar"></div>
-      <div class="time">0:00 / 4:04</div>
     </div>
   </div>
 
@@ -329,7 +342,11 @@ animation-delay:0.4s;
   <div class="track" data-audio="song3.mp3">
     <div class="row">
     <span class="track-num">03.</span>
+
       <div class="title">今日もここで <small>~ for kupi ~</small></div>
+
+      <div class="time">0:00 / 3:54</div>
+
       <div class="icons">
         <span class="lyrics-btn" data-lyrics="lyrics3.html">🗒</span>
         <span class="like" onclick="vote('3', this)">
@@ -340,7 +357,6 @@ animation-delay:0.4s;
 
     <div class="progress">
       <div class="bar"></div>
-      <div class="time">0:00 / 3:54</div>
     </div>
   </div>
 
@@ -348,7 +364,11 @@ animation-delay:0.4s;
   <div class="track" data-audio="song4.mp3">
     <div class="row">
     <span class="track-num">04.</span>
+
       <div class="title">今日もここで <small>~ ballade ver ~</small></div>
+
+      <div class="time">0:00 / 3:49</div>
+
       <div class="icons">
         <span class="lyrics-btn" data-lyrics="lyrics4.html">🗒</span>
         <span class="like" onclick="vote('4', this)">
@@ -359,7 +379,6 @@ animation-delay:0.4s;
 
     <div class="progress">
       <div class="bar"></div>
-      <div class="time">0:00 / 3:49</div>
     </div>
   </div>
 
@@ -367,7 +386,11 @@ animation-delay:0.4s;
   <div class="track" data-audio="song5.mp3">
     <div class="row">
     <span class="track-num">05.</span>
+
       <div class="title">See You <small>~ for kupi ~</small></div>
+
+      <div class="time">0:00 / 4:03</div>
+
       <div class="icons">
         <span class="lyrics-btn" data-lyrics="lyrics5.html">🗒</span>
         <span class="like" onclick="vote('5', this)">
@@ -378,7 +401,6 @@ animation-delay:0.4s;
 
     <div class="progress">
       <div class="bar"></div>
-      <div class="time">0:00 / 4:03</div>
     </div>
   </div>
 
@@ -386,7 +408,11 @@ animation-delay:0.4s;
   <div class="track" data-audio="song6.mp3">
     <div class="row">
     <span class="track-num">06.</span>
+
       <div class="title">声が届くまで <small>~ for kupi ~</small></div>
+
+      <div class="time">0:00 / 3:49</div>
+
       <div class="icons">
         <span class="lyrics-btn" data-lyrics="lyrics6.html">🗒</span>
         <span class="like" onclick="vote('6', this)">
@@ -397,7 +423,6 @@ animation-delay:0.4s;
 
     <div class="progress">
       <div class="bar"></div>
-      <div class="time">0:00 / 3:49</div>
     </div>
   </div>
 
@@ -405,7 +430,11 @@ animation-delay:0.4s;
   <div class="track" data-audio="song7.mp3">
     <div class="row">
     <span class="track-num">07.</span>
+
       <div class="title">この場所で… <small>~ for kupi ~</small></div>
+
+      <div class="time">0:00 / 3:57</div>
+
       <div class="icons">
         <span class="lyrics-btn" data-lyrics="lyrics7.html">🗒</span>
         <span class="like" onclick="vote('7', this)">
@@ -416,7 +445,6 @@ animation-delay:0.4s;
 
     <div class="progress">
       <div class="bar"></div>
-      <div class="time">0:00 / 3:57</div>
     </div>
   </div>
 
@@ -424,7 +452,11 @@ animation-delay:0.4s;
   <div class="track" data-audio="song8.mp3">
     <div class="row">
     <span class="track-num">08.</span>
+
       <div class="title">ここにいるよ… <small>~ Male Vocal ~</small></div>
+
+      <div class="time">0:00 / 4:07</div>
+
       <div class="icons">
         <span class="lyrics-btn" data-lyrics="lyrics8.html">🗒</span>
         <span class="like" onclick="vote('8', this)">
@@ -435,7 +467,6 @@ animation-delay:0.4s;
 
     <div class="progress">
       <div class="bar"></div>
-      <div class="time">0:00 / 4:07</div>
     </div>
   </div>
 
@@ -443,7 +474,11 @@ animation-delay:0.4s;
   <div class="track" data-audio="song9.mp3">
     <div class="row">
     <span class="track-num">09.</span>
+
       <div class="title">消えないで… <small>〜 for kupi 〜</small></div>
+
+      <div class="time">0:00 / 3:41</div>
+
       <div class="icons">
         <span class="lyrics-btn" data-lyrics="lyrics9.html">🗒</span>
         <span class="like" onclick="vote('9', this)">
@@ -454,7 +489,6 @@ animation-delay:0.4s;
 
     <div class="progress">
       <div class="bar"></div>
-      <div class="time">0:00 / 3:41</div>
     </div>
   </div>
 
@@ -462,7 +496,11 @@ animation-delay:0.4s;
   <div class="track" data-audio="song10.mp3">
     <div class="row">
     <span class="track-num">10.</span>
+
       <div class="title">なんでまだ <small>/ Why Am I Still…</small></div>
+
+      <div class="time">0:00 / 3:17</div>
+
       <div class="icons">
         <span class="lyrics-btn" data-lyrics="lyrics10.html">🗒</span>
         <span class="like" onclick="vote('10', this)">
@@ -473,7 +511,6 @@ animation-delay:0.4s;
 
     <div class="progress">
       <div class="bar"></div>
-      <div class="time">0:00 / 3:17</div>
     </div>
   </div>
 
@@ -481,7 +518,11 @@ animation-delay:0.4s;
   <div class="track" data-audio="song11.mp3">
     <div class="row">
     <span class="track-num">11.</span>
+
       <div class="title">Over… But <small>〜 終わったはず 〜</small></div>
+
+      <div class="time">0:00 / 3:04</div>
+
       <div class="icons">
         <span class="lyrics-btn" data-lyrics="lyrics11.html">🗒</span>
         <span class="like" onclick="vote('11', this)">
@@ -492,7 +533,6 @@ animation-delay:0.4s;
 
     <div class="progress">
       <div class="bar"></div>
-      <div class="time">0:00 / 3:04</div>
     </div>
   </div>
 
@@ -500,7 +540,11 @@ animation-delay:0.4s;
   <div class="track" data-audio="song12.mp3">
     <div class="row">
     <span class="track-num">12.</span>
+
       <div class="title">Looking for you <small>〜 for kupi 〜</small></div>
+
+      <div class="time">0:00 / 4:28</div>
+
       <div class="icons">
         <span class="lyrics-btn" data-lyrics="lyrics12.html">🗒</span>
         <span class="like" onclick="vote('12', this)">
@@ -511,7 +555,6 @@ animation-delay:0.4s;
 
     <div class="progress">
       <div class="bar"></div>
-      <div class="time">0:00 / 4:28</div>
     </div>
   </div>
 
@@ -519,7 +562,11 @@ animation-delay:0.4s;
   <div class="track" data-audio="song13.mp3">
     <div class="row">
     <span class="track-num">13.</span>
+
       <div class="title">こんな私でもいいでしょ？ <small>〜 for kupi 〜</small></div>
+
+      <div class="time">0:00 / 3:09</div>
+
       <div class="icons">
         <span class="lyrics-btn" data-lyrics="lyrics13.html">🗒</span>
         <span class="like" onclick="vote('13', this)">
@@ -530,7 +577,6 @@ animation-delay:0.4s;
 
     <div class="progress">
       <div class="bar"></div>
-      <div class="time">0:00 / 3:09</div>
     </div>
   </div>
 
@@ -538,7 +584,11 @@ animation-delay:0.4s;
   <div class="track" data-audio="song14.mp3">
     <div class="row">
     <span class="track-num">14.</span>
+
       <div class="title">こんな俺でもいいでしょ？ <small>~ Male Vocal ~</small></div>
+
+      <div class="time">0:00 / 3:09</div>
+
       <div class="icons">
         <span class="lyrics-btn" data-lyrics="lyrics14.html">🗒</span>
         <span class="like" onclick="vote('14', this)">
@@ -549,7 +599,6 @@ animation-delay:0.4s;
 
     <div class="progress">
       <div class="bar"></div>
-      <div class="time">0:00 / 3:09</div>
     </div>
   </div>
 
@@ -557,7 +606,11 @@ animation-delay:0.4s;
   <div class="track" data-audio="song15.mp3">
     <div class="row">
     <span class="track-num">15.</span>
+
       <div class="title">Not Over You 〜 君がいない 〜</div>
+
+      <div class="time">0:00 / 3:04</div>
+
       <div class="icons">
         <span class="lyrics-btn" data-lyrics="lyrics15.html">🗒</span>
         <span class="like" onclick="vote('15', this)">
@@ -568,7 +621,6 @@ animation-delay:0.4s;
 
     <div class="progress">
       <div class="bar"></div>
-      <div class="time">0:00 / 3:04</div>
     </div>
   </div>
 
@@ -576,7 +628,11 @@ animation-delay:0.4s;
   <div class="track" data-audio="song16.mp3">
     <div class="row">
     <span class="track-num">16.</span>
+
       <div class="title">Late Night 〜君のいない夜〜</div>
+
+      <div class="time">0:00 / 2:57</div>
+
       <div class="icons">
         <span class="lyrics-btn" data-lyrics="lyrics16.html">🗒</span>
         <span class="like" onclick="vote('16', this)">
@@ -587,7 +643,6 @@ animation-delay:0.4s;
 
     <div class="progress">
       <div class="bar"></div>
-      <div class="time">0:00 / 2:57</div>
     </div>
   </div>
 
@@ -661,7 +716,7 @@ player.addEventListener("timeupdate", () => {
   const percent = (player.currentTime / player.duration) * 100;
 
   const bar = playing.querySelector(".bar");
-  const time = playing.querySelector(".time");
+  const time = playing.querySelector(".row .time");
 
   if(bar){
     bar.style.width = percent + "%";

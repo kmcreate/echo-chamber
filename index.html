@@ -620,7 +620,7 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">15.</span>
 
-      <div class="title">Not Over You 〜 君がいない 〜</div>
+      <div class="title">Not Over You <small>〜 君がいない 〜</small></div>
 
       <div class="time">0:00 / 3:04</div>
 
@@ -642,7 +642,7 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">16.</span>
 
-      <div class="title">Late Night 〜君のいない夜〜</div>
+      <div class="title">Late Night <small>〜君のいない夜〜</small></div>
 
       <div class="time">0:00 / 2:57</div>
 
@@ -686,38 +686,81 @@ tracks.forEach(track => {
     const src = track.dataset.audio;
 
     // 同じ曲なら再生/停止
-    if(player.src.includes(src)){
-      player.paused ? player.play() : player.pause();
+    if(track.classList.contains("playing")){
+      if(player.paused){
+        player.play();
+      }else{
+        player.pause();
+      }
       return;
     }
 
-    // 再生中リセット
-    tracks.forEach(t => t.classList.remove("playing"));
+    // リセット（playing + イコライザー削除）
+    tracks.forEach(t => {
+      t.classList.remove("playing");
 
+      const oldEq = t.querySelector(".equalizer");
+      if(oldEq) oldEq.remove();
+    });
+
+    // 再生対象にする
     track.classList.add("playing");
 
-    // 🔥 イコライザー追加（track-numに入れる）
+    // イコライザー追加
     const num = track.querySelector(".track-num");
-
-if(num && !track.querySelector(".equalizer")){
-  const eq = document.createElement("div");
-  eq.className = "equalizer";
-  eq.innerHTML = '<span></span><span></span><span></span>';
-
-  num.prepend(eq);
-}
+    if(num){
+      const eq = document.createElement("div");
+      eq.className = "equalizer";
+      eq.innerHTML = '<span></span><span></span><span></span>';
+      num.prepend(eq);
+    }
 
     player.src = src;
     player.play();
+
   });
 
-document.querySelectorAll(".like").forEach(el=>{
-  el.addEventListener("click", (e)=>{
-    e.stopPropagation();
-  });
 });
 
+
+// 曲終了 → 次の曲へ
+player.addEventListener("ended", () => {
+
+  const current = document.querySelector(".track.playing");
+  if(!current) return;
+
+  const trackArray = Array.from(tracks);
+  const index = trackArray.indexOf(current);
+
+  const next = trackArray[index + 1];
+
+  if(next){
+
+    // 今の曲リセット
+    current.classList.remove("playing");
+    const oldEq = current.querySelector(".equalizer");
+    if(oldEq) oldEq.remove();
+
+    // 次の曲セット
+    next.classList.add("playing");
+
+    // イコライザー追加
+    const num = next.querySelector(".track-num");
+    if(num){
+      const eq = document.createElement("div");
+      eq.className = "equalizer";
+      eq.innerHTML = '<span></span><span></span><span></span>';
+      num.prepend(eq);
+    }
+
+    player.src = next.dataset.audio;
+    player.play();
+
+  }
+
 });
+
+
 
 
 // 🔥 ネオンバー制御（既存風）

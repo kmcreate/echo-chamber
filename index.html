@@ -55,9 +55,10 @@ header p{
 .track{
  background:#111;
  border-radius:10px;
- padding:12px;
+ padding:8px 14px;
  border:1px solid #333;
- min-height:30px;
+ min-height:40px;
+ margin-top:6px;
 }
 
 /* 上段（タイトル＋アイコン） */
@@ -123,6 +124,7 @@ header p{
   white-space:nowrap;
   z-index:10;
   opacity:0.7;
+  margin-top:8px;
 }
 
 /* 再生中ネオン強化 */
@@ -220,15 +222,15 @@ header p{
 .equalizer{
 display:inline-flex;
 gap:2px;
-margin-right:4px;
+margin-right:2px;
 }
 
 .equalizer span{
-width:3px;
-height:10px;
-background:#00ffe5;
-display:block;
-animation:eq 1s infinite ease-in-out;
+  width:3px;
+  height:10px;
+  background:#555;
+  display:block;
+  animation:eq 1.2s infinite ease-in-out;
 }
 
 .equalizer span:nth-child(2){
@@ -244,6 +246,16 @@ animation-delay:0.4s;
 50%{height:12px}
 }
 
+.track.playing .equalizer span{
+  background:#00ffe5;
+}
+
+.track.playing{
+  border:1px solid #00ffe5;
+  box-shadow:0 0 10px rgba(0,255,229,0.4);
+  position:relative;
+  z-index:1;
+}
 
 </style>
 

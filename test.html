@@ -1,1 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Test Vote</title>
 
+<style>
+body{
+  background:#111;
+  color:#fff;
+  font-family:sans-serif;
+  text-align:center;
+}
+
+.track{
+  padding:15px;
+  border-bottom:1px solid #333;
+}
+
+.like{
+  font-size:20px;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h2>🎧 Test Page</h2>
+
+<div class="track">
+  曲①　
+  <span class="like" onclick="vote(1)">👍</span>
+  <span id="v1">0</span>
+</div>
+
+<div class="track">
+  曲②　
+  <span class="like" onclick="vote(2)">👍</span>
+  <span id="v2">0</span>
+</div>
+
+<script>
+function vote(id){
+  const el = document.getElementById("v"+id);
+  el.textContent = Number(el.textContent) + 1;
+}
+</script>
+
+</body>
+</html>

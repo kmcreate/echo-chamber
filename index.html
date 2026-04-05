@@ -847,49 +847,36 @@ player.addEventListener("timeupdate", () => {
   }
 });
 
-// 🔥 シークバー操作（完全版：バグ修正済み）
+// 🔥 シークバー操作（スマホのみ・敏感対策済み）
 let activeBar = null;
+let startX = 0;
 
 tracks.forEach(track => {
 
   const bar = track.querySelector(".bar");
   if(!bar) return;
 
-  // ===== スマホ =====
   bar.addEventListener("touchstart", (e) => {
     activeBar = bar;
-    moveTouch(e);
+    startX = e.touches[0].clientX;
   });
 
   bar.addEventListener("touchmove", (e) => {
     if(!activeBar) return;
-    moveTouch(e);
+
+    const currentX = e.touches[0].clientX;
+    const diff = Math.abs(currentX - startX);
+
+    // 👉 敏感さ調整（10〜15くらいがいい）
+    if(diff > 12){
+      moveTouch(e);
+    }
   });
 
-  window.addEventListener("touchend", () => {
-    activeBar = null;
-  });
+});
 
-  // ===== PC =====
-  bar.addEventListener("mousedown", () => {
-    activeBar = bar;
-  });
-
-  window.addEventListener("mousemove", (e) => {
-    if(!activeBar) return;
-    moveMouse(e);
-  });
-
-  window.addEventListener("mouseup", () => {
-    activeBar = null;
-  });
-
-  bar.addEventListener("click", (e) => {
-    activeBar = bar;
-    moveMouse(e);
-    activeBar = null;
-  });
-
+window.addEventListener("touchend", () => {
+  activeBar = null;
 });
 
 
@@ -906,17 +893,6 @@ function moveTouch(e){
   player.currentTime = player.duration * percent;
 }
 
-function moveMouse(e){
-  if(!player.duration || !activeBar) return;
-
-  const rect = activeBar.getBoundingClientRect();
-  if(!rect.width) return;
-
-  const x = e.clientX - rect.left;
-  const percent = Math.max(0, Math.min(1, x / rect.width));
-
-  player.currentTime = player.duration * percent;
-}
 
 // ⏱ 時間フォーマット
 function format(sec){

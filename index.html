@@ -66,7 +66,7 @@ header p{
 .track{
  background:#111;
  border-radius:10px;
- padding:8px 14px;
+ padding:10px 14px;
  border:1px solid #333;
  min-height:25px;
  margin-top:2px;
@@ -875,7 +875,7 @@ tracks.forEach(track => {
 
       const rect = activeTrack.getBoundingClientRect();
       const x = e.touches[0].clientX - rect.left;
-      const percent = Math.max(0, Math.min(1, x / rect.width));
+      const percent = Math.max(0, Math.min(1, (x / rect.width) * 0.6));
 
       targetTime = player.duration * percent;
     }

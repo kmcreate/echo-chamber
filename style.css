@@ -1,1 +1,53 @@
+body{
+ background:#000;
+ color:#fff;
+ font-family:sans-serif;
+ margin:0;
+}
+
+.lyrics-page{
+ max-width:700px;
+ margin:auto;
+ padding:40px 20px;
+}
+
+h2{
+ text-align:center;
+ font-weight:300;
+ letter-spacing:2px;
+ margin-bottom:10px;
+ font-size:16px;
+}
+
+.lyrics{
+  max-width:520px;
+  margin:0 auto;
+  padding:0 16px;
+  text-align:left;
+  line-height:1.8;
+  white-space:pre-line;
+  font-size:12px;
+}
+
+.back{
+ position:fixed;
+ top:15px;
+ left:15px;
+ font-size:12px;
+ opacity:0.4;
+ cursor:pointer;
+}
+
+.back:hover{
+ opacity:1;
+}
+
+.credit{
+ font-size:11px;
+ color:#aaa;
+ margin-top:5px;
+ text-align:center;
+}
+
+
 

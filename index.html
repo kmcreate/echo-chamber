@@ -847,48 +847,52 @@ player.addEventListener("timeupdate", () => {
   }
 });
 
-// 🔥 シークバー操作（なめらか追従版）
-let activeBar = null;
+// 🔥 シーク操作（スマホ専用・再生と干渉しない版）
+let activeTrack = null;
+let startX = 0;
+let isDragging = false;
 
 tracks.forEach(track => {
 
-  const bar = track.querySelector(".bar");
-  if(!bar) return;
+  track.addEventListener("touchstart", (e) => {
+    activeTrack = track;
+    startX = e.touches[0].clientX;
+    isDragging = false;
+  }, { passive: true });
 
-  bar.addEventListener("touchstart", (e) => {
-    activeBar = bar;
-    moveTouch(e);
-  });
+  track.addEventListener("touchmove", (e) => {
+    if(!activeTrack) return;
 
-  bar.addEventListener("touchmove", (e) => {
-    if(!activeBar) return;
+    const currentX = e.touches[0].clientX;
+    const diff = Math.abs(currentX - startX);
 
-    requestAnimationFrame(() => {
-      moveTouch(e);
-    });
+    if(diff > 8){
+      isDragging = true;
+      move(e);
+    }
+  }, { passive: true });
+
+  track.addEventListener("touchend", () => {
+    activeTrack = null;
+    isDragging = false;
   });
 
 });
 
-window.addEventListener("touchend", () => {
-  activeBar = null;
-});
 
+// ===== 共通処理 =====
+function move(e){
+  if(!player.duration || !activeTrack) return;
 
-// ===== 共通処理（ここが重要）=====
-function moveTouch(e){
-  if(!player.duration || !activeBar) return;
-
-  const rect = activeBar.getBoundingClientRect();
+  const rect = activeTrack.getBoundingClientRect();
   if(!rect.width) return;
 
   const x = e.touches[0].clientX - rect.left;
   const percent = Math.max(0, Math.min(1, x / rect.width));
-
   const target = player.duration * percent;
 
-  // 👉 ここで“ふわっと追従”
-  player.currentTime += (target - player.currentTime) * 0.3;
+  // なめらか追従
+  player.currentTime += (target - player.currentTime) * 0.4;
 }
 
 // ⏱ 時間フォーマット

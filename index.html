@@ -847,10 +847,13 @@ player.addEventListener("timeupdate", () => {
   }
 });
 
-// 🔥 シーク操作（スマホ専用・再生と干渉しない版）
+// 🔥 なめらかシーク（ぬるっと版）
 let activeTrack = null;
 let startX = 0;
 let isDragging = false;
+
+// 👉 目標時間（ここに向かってゆっくり動く）
+let targetTime = 0;
 
 tracks.forEach(track => {
 
@@ -866,9 +869,14 @@ tracks.forEach(track => {
     const currentX = e.touches[0].clientX;
     const diff = Math.abs(currentX - startX);
 
-    if(diff > 8){
+    if(diff > 6){
       isDragging = true;
-      move(e);
+
+      const rect = activeTrack.getBoundingClientRect();
+      const x = e.touches[0].clientX - rect.left;
+      const percent = Math.max(0, Math.min(1, x / rect.width));
+
+      targetTime = player.duration * percent;
     }
   }, { passive: true });
 
@@ -880,20 +888,23 @@ tracks.forEach(track => {
 });
 
 
-// ===== 共通処理 =====
-function move(e){
-  if(!player.duration || !activeTrack) return;
+// 🔥 ここが“ぬるっ”の本体
+function smoothSeek(){
+  if(!player.duration) return;
 
-  const rect = activeTrack.getBoundingClientRect();
-  if(!rect.width) return;
+  const diff = targetTime - player.currentTime;
 
-  const x = e.touches[0].clientX - rect.left;
-  const percent = Math.max(0, Math.min(1, x / rect.width));
-  const target = player.duration * percent;
+  // 👉 差が小さいときは止める（ブルブル防止）
+  if(Math.abs(diff) < 0.01) return;
 
-  // なめらか追従
-  player.currentTime += (target - player.currentTime) * 0.4;
+  // 👉 じわ〜っと追従
+  player.currentTime += diff * 0.15;
 }
+
+// 👉 常に回す
+setInterval(smoothSeek, 16);
+
+
 
 // ⏱ 時間フォーマット
 function format(sec){

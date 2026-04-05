@@ -853,18 +853,20 @@ let activeTrack = null;
 let startX = 0;
 let isDragging = false;
 
-// 👉 目標時間（ここに向かってゆっくり動く）
 let targetTime = player.currentTime;
 
 tracks.forEach(track => {
 
-  track.addEventListener("touchstart", (e) => {
-    activeTrack = track;
-    startX = e.touches[0].clientX;
-    isDragging = false;
-  }, { passive: true });
+  const bar = track.querySelector(".bar");
+  if(!bar) return;
 
-  track.addEventListener("touchmove", (e) => {
+bar.addEventListener("touchstart", (e) => {
+  activeTrack = track;
+  startX = e.touches[0].clientX;
+  isDragging = false;
+});
+
+  bar.addEventListener("touchmove", (e) => {
     if(!activeTrack) return;
 
     const currentX = e.touches[0].clientX;
@@ -873,37 +875,32 @@ tracks.forEach(track => {
     if(diff > 6){
       isDragging = true;
 
-      const rect = activeTrack.getBoundingClientRect();
+      const rect = bar.getBoundingClientRect();
       const x = e.touches[0].clientX - rect.left;
-      const percent = Math.max(0, Math.min(1, (x / rect.width) * 0.6));
+      const percent = Math.max(0, Math.min(1, x / rect.width));
 
       targetTime = player.duration * percent;
     }
-  }, { passive: true });
+  });
 
-  track.addEventListener("touchend", () => {
+  bar.addEventListener("touchend", () => {
     activeTrack = null;
     isDragging = false;
   });
 
 });
 
-
-// 🔥 ここが“ぬるっ”の本体
 function smoothSeek(){
   if(!player.duration) return;
   if(!isDragging) return;
 
   const diff = targetTime - player.currentTime;
 
-  // 👉 差が小さいときは止める（ブルブル防止）
   if(Math.abs(diff) < 0.01) return;
 
-  // 👉 じわ〜っと追従
   player.currentTime += diff * 0.08;
 }
 
-// 👉 常に回す
 function loop(){
   smoothSeek();
   requestAnimationFrame(loop);

@@ -853,7 +853,7 @@ let startX = 0;
 let isDragging = false;
 
 // 👉 目標時間（ここに向かってゆっくり動く）
-let targetTime = 0;
+let targetTime = player.currentTime;
 
 tracks.forEach(track => {
 
@@ -891,6 +891,7 @@ tracks.forEach(track => {
 // 🔥 ここが“ぬるっ”の本体
 function smoothSeek(){
   if(!player.duration) return;
+  if(!isDragging) return;
 
   const diff = targetTime - player.currentTime;
 

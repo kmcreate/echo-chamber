@@ -734,6 +734,10 @@ animation-delay:0.4s;
   </div>
 </div>
 
+<div class="bar-wrap">
+  <div class="bar"></div>
+</div>
+
 <script>
 const player = document.getElementById("player");
 const tracks = document.querySelectorAll(".track");
@@ -843,6 +847,76 @@ player.addEventListener("timeupdate", () => {
   }
 });
 
+// 🔥 シークバー操作（完全版：バグ修正済み）
+let activeBar = null;
+
+tracks.forEach(track => {
+
+  const bar = track.querySelector(".bar");
+  if(!bar) return;
+
+  // ===== スマホ =====
+  bar.addEventListener("touchstart", (e) => {
+    activeBar = bar;
+    moveTouch(e);
+  });
+
+  bar.addEventListener("touchmove", (e) => {
+    if(!activeBar) return;
+    moveTouch(e);
+  });
+
+  window.addEventListener("touchend", () => {
+    activeBar = null;
+  });
+
+  // ===== PC =====
+  bar.addEventListener("mousedown", () => {
+    activeBar = bar;
+  });
+
+  window.addEventListener("mousemove", (e) => {
+    if(!activeBar) return;
+    moveMouse(e);
+  });
+
+  window.addEventListener("mouseup", () => {
+    activeBar = null;
+  });
+
+  bar.addEventListener("click", (e) => {
+    activeBar = bar;
+    moveMouse(e);
+    activeBar = null;
+  });
+
+});
+
+
+// ===== 共通処理 =====
+function moveTouch(e){
+  if(!player.duration || !activeBar) return;
+
+  const rect = activeBar.getBoundingClientRect();
+  if(!rect.width) return;
+
+  const x = e.touches[0].clientX - rect.left;
+  const percent = Math.max(0, Math.min(1, x / rect.width));
+
+  player.currentTime = player.duration * percent;
+}
+
+function moveMouse(e){
+  if(!player.duration || !activeBar) return;
+
+  const rect = activeBar.getBoundingClientRect();
+  if(!rect.width) return;
+
+  const x = e.clientX - rect.left;
+  const percent = Math.max(0, Math.min(1, x / rect.width));
+
+  player.currentTime = player.duration * percent;
+}
 
 // ⏱ 時間フォーマット
 function format(sec){

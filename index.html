@@ -128,6 +128,7 @@ header p{
   width:0%;
   background:linear-gradient(90deg,#00ffe5,#4b7cff); /* ←既存と同じ */
   border-radius:8px;
+  will-change: width;
 }
 
 .track-num{
@@ -903,7 +904,11 @@ function smoothSeek(){
 }
 
 // 👉 常に回す
-setInterval(smoothSeek, 16);
+function loop(){
+  smoothSeek();
+  requestAnimationFrame(loop);
+}
+loop();
 
 
 

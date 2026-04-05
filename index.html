@@ -847,9 +847,8 @@ player.addEventListener("timeupdate", () => {
   }
 });
 
-// 🔥 シークバー操作（スマホのみ・敏感対策済み）
+// 🔥 シークバー操作（なめらか追従版）
 let activeBar = null;
-let startX = 0;
 
 tracks.forEach(track => {
 
@@ -858,19 +857,15 @@ tracks.forEach(track => {
 
   bar.addEventListener("touchstart", (e) => {
     activeBar = bar;
-    startX = e.touches[0].clientX;
+    moveTouch(e);
   });
 
   bar.addEventListener("touchmove", (e) => {
     if(!activeBar) return;
 
-    const currentX = e.touches[0].clientX;
-    const diff = Math.abs(currentX - startX);
-
-    // 👉 敏感さ調整（10〜15くらいがいい）
-    if(diff > 15){
+    requestAnimationFrame(() => {
       moveTouch(e);
-    }
+    });
   });
 
 });
@@ -880,7 +875,7 @@ window.addEventListener("touchend", () => {
 });
 
 
-// ===== 共通処理 =====
+// ===== 共通処理（ここが重要）=====
 function moveTouch(e){
   if(!player.duration || !activeBar) return;
 
@@ -890,9 +885,11 @@ function moveTouch(e){
   const x = e.touches[0].clientX - rect.left;
   const percent = Math.max(0, Math.min(1, x / rect.width));
 
-  player.currentTime = player.duration * percent;
-}
+  const target = player.duration * percent;
 
+  // 👉 ここで“ふわっと追従”
+  player.currentTime += (target - player.currentTime) * 0.3;
+}
 
 // ⏱ 時間フォーマット
 function format(sec){

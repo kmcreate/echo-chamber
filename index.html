@@ -753,49 +753,6 @@ animation-delay:0.4s;
 const player = document.getElementById("player");
 const tracks = document.querySelectorAll(".track");
 
-tracks.forEach(track => {
-
-  track.addEventListener("click", () => {
-
-    const src = track.dataset.audio;
-
-    // 同じ曲なら再生/停止
-    if(track.classList.contains("playing")){
-      if(player.paused){
-        player.play();
-      }else{
-        player.pause();
-      }
-      return;
-    }
-
-    // リセット（playing + イコライザー削除）
-    tracks.forEach(t => {
-      t.classList.remove("playing");
-
-      const oldEq = t.querySelector(".equalizer");
-      if(oldEq) oldEq.remove();
-    });
-
-    // 再生対象にする
-    track.classList.add("playing");
-
-    // イコライザー追加
-    const num = track.querySelector(".track-num");
-    if(num){
-      const eq = document.createElement("div");
-      eq.className = "equalizer";
-      eq.innerHTML = '<span></span><span></span><span></span>';
-      num.prepend(eq);
-    }
-
-    player.src = src;
-    player.play();
-
-  });
-
-});
-
 
 // 曲終了 → 次の曲へ
 player.addEventListener("ended", () => {
@@ -908,37 +865,37 @@ window.onclick = (e)=>{
 
 tracks.forEach(track => {
 
-  track.addEventListener("click", () => {
+  track.addEventListener("click", async () => {
 
     const src = track.dataset.audio;
 
-    // 👉 タップアニメ
+    // タップアニメ
     track.classList.add("tap");
     setTimeout(() => {
       track.classList.remove("tap");
     }, 100);
 
-    // 👉 同じ曲なら再生/停止
+    // 同じ曲ならトグル
     if(track.classList.contains("playing")){
       if(player.paused){
-        player.play();
+        await player.play().catch(()=>{});
       }else{
         player.pause();
       }
       return;
     }
 
-    // 👉 リセット
+    // リセット
     tracks.forEach(t => {
       t.classList.remove("playing");
       const oldEq = t.querySelector(".equalizer");
       if(oldEq) oldEq.remove();
     });
 
-    // 👉 再生対象
+    // 再生対象
     track.classList.add("playing");
 
-    // 👉 イコライザー
+    // イコライザー
     const num = track.querySelector(".track-num");
     if(num){
       const eq = document.createElement("div");
@@ -947,9 +904,11 @@ tracks.forEach(track => {
       num.prepend(eq);
     }
 
-    // 👉 再生（ここは絶対遅らせない）
+    // 👉ここがポイント
+    player.pause(); // 一回止める
     player.src = src;
-    player.play();
+
+    await player.play().catch(()=>{}); // エラー潰す
 
   });
 

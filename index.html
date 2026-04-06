@@ -910,15 +910,16 @@ tracks.forEach(track => {
 
   track.addEventListener("click", () => {
 
-    track.classList.add("tap");
+ track.classList.add("tap");
 
-    setTimeout(() => {
-      track.classList.remove("tap");
-    }, 120);
+setTimeout(() => {
 
-  });
+  player.src = src;
+  player.play();
 
-});
+}, 80);
+
+
 
 </script>
 

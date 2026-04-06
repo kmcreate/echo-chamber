@@ -73,6 +73,8 @@ header p{
   width:100%;
   margin-bottom: 6px;
   transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
 }
 
 .track:active{
@@ -158,8 +160,14 @@ header p{
 }
 
 .track.playing{
-  border: 1px solid #00ffe5;
-  box-shadow: 0 0 10px rgba(0,255,229,0.6);
+  border:2px solid #00ffe5;
+  box-shadow:
+    inset 0 0 10px rgba(0,255,229,0.4),
+    0 0 10px rgba(0,255,229,0.6);
+
+  position:relative;
+  overflow:hidden;
+  z-index:1;
 
   animation: glowMove 1.5s linear infinite;
 }
@@ -176,10 +184,6 @@ header p{
   }
 }
 
-.track.playing{
-  position: relative;
-  overflow: hidden;
-}
 
 .track.playing::after{
   content: "";
@@ -333,12 +337,7 @@ animation-delay:0.4s;
   background:#00ffe5;
 }
 
-.track.playing{
-  border:2px solid #00ffe5;
-  box-shadow: inset 0 0 10px rgba(0,255,229,0.4);
-  position:relative;
-  z-index:1;
-}
+
 
 </style>
 

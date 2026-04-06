@@ -79,6 +79,10 @@ header p{
   box-shadow: 0 0 8px rgba(255,255,255,0.15);
 }
 
+.track.tap{
+  transform: scale(0.97);
+}
+
 /* 上段（タイトル＋アイコン） */
 .row{
   display:flex;
@@ -901,6 +905,21 @@ window.onclick = (e)=>{
     document.getElementById("lyricsModal").style.display = "none";
   }
 };
+
+tracks.forEach(track => {
+
+  track.addEventListener("click", () => {
+
+    track.classList.add("tap");
+
+    setTimeout(() => {
+      track.classList.remove("tap");
+    }, 120);
+
+  });
+
+});
+
 </script>
 
 <script>

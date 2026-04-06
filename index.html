@@ -908,14 +908,50 @@ window.onclick = (e)=>{
 
 tracks.forEach(track => {
 
- track.addEventListener("click", () => {
+  track.addEventListener("click", () => {
 
-  // アニメーションだけ先にやる
-  track.classList.add("tap");
+    const src = track.dataset.audio;
 
-  setTimeout(() => {
-    track.classList.remove("tap");
-  }, 100);
+    // 👉 タップアニメ
+    track.classList.add("tap");
+    setTimeout(() => {
+      track.classList.remove("tap");
+    }, 100);
+
+    // 👉 同じ曲なら再生/停止
+    if(track.classList.contains("playing")){
+      if(player.paused){
+        player.play();
+      }else{
+        player.pause();
+      }
+      return;
+    }
+
+    // 👉 リセット
+    tracks.forEach(t => {
+      t.classList.remove("playing");
+      const oldEq = t.querySelector(".equalizer");
+      if(oldEq) oldEq.remove();
+    });
+
+    // 👉 再生対象
+    track.classList.add("playing");
+
+    // 👉 イコライザー
+    const num = track.querySelector(".track-num");
+    if(num){
+      const eq = document.createElement("div");
+      eq.className = "equalizer";
+      eq.innerHTML = '<span></span><span></span><span></span>';
+      num.prepend(eq);
+    }
+
+    // 👉 再生（ここは絶対遅らせない）
+    player.src = src;
+    player.play();
+
+  });
 
 });
 

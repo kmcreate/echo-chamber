@@ -908,16 +908,16 @@ window.onclick = (e)=>{
 
 tracks.forEach(track => {
 
-  track.addEventListener("click", () => {
+ track.addEventListener("click", () => {
 
- track.classList.add("tap");
+  // アニメーションだけ先にやる
+  track.classList.add("tap");
 
-setTimeout(() => {
+  setTimeout(() => {
+    track.classList.remove("tap");
+  }, 100);
 
-  player.src = src;
-  player.play();
-
-}, 80);
+});
 
 
 

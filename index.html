@@ -848,64 +848,7 @@ player.addEventListener("timeupdate", () => {
   }
 });
 
-// 🔥 なめらかシーク（ぬるっと版）
-let activeTrack = null;
-let startX = 0;
-let isDragging = false;
 
-let targetTime = player.currentTime;
-
-tracks.forEach(track => {
-
-  const bar = track.querySelector(".bar");
-  if(!bar) return;
-
-bar.addEventListener("touchstart", (e) => {
-  activeTrack = track;
-  startX = e.touches[0].clientX;
-  isDragging = false;
-});
-
-  bar.addEventListener("touchmove", (e) => {
-    if(!activeTrack) return;
-
-    const currentX = e.touches[0].clientX;
-    const diff = Math.abs(currentX - startX);
-
-    if(diff > 6){
-      isDragging = true;
-
-      const rect = bar.getBoundingClientRect();
-      const x = e.touches[0].clientX - rect.left;
-      const percent = Math.max(0, Math.min(1, x / rect.width));
-
-      targetTime = player.duration * percent;
-    }
-  });
-
-  bar.addEventListener("touchend", () => {
-    activeTrack = null;
-    isDragging = false;
-  });
-
-});
-
-function smoothSeek(){
-  if(!player.duration) return;
-  if(!isDragging) return;
-
-  const diff = targetTime - player.currentTime;
-
-  if(Math.abs(diff) < 0.01) return;
-
-  player.currentTime += diff * 0.08;
-}
-
-function loop(){
-  smoothSeek();
-  requestAnimationFrame(loop);
-}
-loop();
 
 
 

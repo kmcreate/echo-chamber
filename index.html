@@ -71,6 +71,7 @@ header p{
  min-height:25px;
  margin-top:2px;
   width:100%;
+  margin-bottom: 6px;
   transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s;
 }
 
@@ -154,6 +155,57 @@ header p{
   box-shadow:
     0 0 6px #00ffe5,
     0 0 12px #00ffe5;
+}
+
+.track.playing{
+  border: 1px solid #00ffe5;
+  box-shadow: 0 0 10px rgba(0,255,229,0.6);
+
+  animation: glowMove 1.5s linear infinite;
+}
+
+@keyframes glowMove{
+  0%{
+    box-shadow: 0 0 6px rgba(0,255,229,0.4);
+  }
+  50%{
+    box-shadow: 0 0 18px rgba(0,255,229,0.9);
+  }
+  100%{
+    box-shadow: 0 0 6px rgba(0,255,229,0.4);
+  }
+}
+
+.track.playing{
+  position: relative;
+  overflow: hidden;
+}
+
+.track.playing::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+   rgba(0,255,229,0.2),
+   rgba(0,255,229,0.6),
+   rgba(0,255,229,0.2),
+    transparent
+  );
+  animation: shine 4s linear infinite;
+}
+
+@keyframes shine{
+  0%{
+    left: -100%;
+  }
+  100%{
+    left: 100%;
+  }
 }
 
 
@@ -281,7 +333,7 @@ animation-delay:0.4s;
 }
 
 .track.playing{
-  border:1px solid #00ffe5;
+  border:2px solid #00ffe5;
   box-shadow: inset 0 0 10px rgba(0,255,229,0.4);
   position:relative;
   z-index:1;

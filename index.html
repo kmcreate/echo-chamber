@@ -337,7 +337,41 @@ animation-delay:0.4s;
   background:#00ffe5;
 }
 
+.title-wrap{
+  flex: 1;
+  overflow: hidden;
+  min-width: 0;
+}
 
+.title-track{
+  display:inline-flex;
+  white-space:nowrap;
+  will-change:transform;
+}
+
+.title-text{
+  flex:0 0 auto;
+  white-space:nowrap;
+  font-size:12px;
+}
+
+.title-gap{
+  flex:0 0 auto;
+}
+
+/* 再生中だけ流れる */
+.track.playing .title-track{
+  animation: marquee var(--marquee-duration, 8s) linear infinite;
+}
+
+@keyframes marquee{
+  from{
+    transform:translateX(0);
+  }
+  to{
+    transform:translateX(calc(-1 * var(--marquee-distance, 0px)));
+  }
+}
 
 </style>
 
@@ -375,7 +409,11 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">01.</span>
 
-    <div class="title">声の灯り <small>~ for techico ~</small></div>
+    <div class="title-wrap">
+  <div class="title-track">
+    <span class="title-text">声の灯り </span>
+  </div>
+</div>
 
       <div class="time">0:00 / 4:18</div>
 
@@ -397,7 +435,11 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">02.</span>
 
-    <div class="title">声の灯り <small>~ Male Vocal ~</small></div>
+    <div class="title-wrap">
+  <div class="title-track">
+    <span class="title-text">声の灯り ~ Male ~</span>
+  </div>
+</div>
 
     <div class="time">0:00 / 4:04</div>
 
@@ -419,7 +461,11 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">03.</span>
 
-      <div class="title">今日もここで <small>~ for kupi ~</small></div>
+<div class="title-wrap">
+  <div class="title-track">
+    <span class="title-text">今日もここで 🖍️</span>
+  </div>
+</div>
 
       <div class="time">0:00 / 3:54</div>
 
@@ -442,7 +488,11 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">04.</span>
 
-      <div class="title">今日もここで <small>~ ballade ver ~</small></div>
+    <div class="title-wrap">
+    <div class="title-track">
+    <span class="title-text">今日もここで ~ ballade ~</span>
+    </div>
+    </div>
 
       <div class="time">0:00 / 3:49</div>
 
@@ -465,7 +515,11 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">05.</span>
 
-      <div class="title">See You <small>~ for kupi ~</small></div>
+    <div class="title-wrap">
+    <div class="title-track">
+    <span class="title-text">See You 🖍️</span>
+    </div>
+    </div>
 
       <div class="time">0:00 / 4:03</div>
 
@@ -488,7 +542,11 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">06.</span>
 
-      <div class="title">声が届くまで <small>~ for kupi ~</small></div>
+    <div class="title-wrap">
+    <div class="title-track">
+    <span class="title-text">声が届くまで 🖍️</span>
+    </div>
+    </div>
 
       <div class="time">0:00 / 3:49</div>
 
@@ -511,7 +569,11 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">07.</span>
 
-      <div class="title">この場所で… <small>~ for kupi ~</small></div>
+    <div class="title-wrap">
+    <div class="title-track">
+    <span class="title-text">この場所で… 🖍️</span>
+    </div>
+    </div>
 
       <div class="time">0:00 / 3:57</div>
 
@@ -534,7 +596,11 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">08.</span>
 
-      <div class="title">ここにいるよ… <small>~ Male Vocal ~</small></div>
+    <div class="title-wrap">
+    <div class="title-track">
+    <span class="title-text">ここにいるよ… ~ Male ~</span>
+    </div>
+    </div>
 
       <div class="time">0:00 / 4:07</div>
 
@@ -557,7 +623,11 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">09.</span>
 
-      <div class="title">消えないで… <small>〜 for kupi 〜</small></div>
+    <div class="title-wrap">
+    <div class="title-track">
+    <span class="title-text">消えないで… 🖍️</span>
+    </div>
+    </div>
 
       <div class="time">0:00 / 3:41</div>
 
@@ -580,7 +650,11 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">10.</span>
 
-      <div class="title">なんでまだ <small>/ Why Am I Still…</small></div>
+    <div class="title-wrap">
+    <div class="title-track">
+    <span class="title-text">なんでまだ / Why Am I Still…</span>
+    </div>
+    </div>
 
       <div class="time">0:00 / 3:17</div>
 
@@ -603,7 +677,11 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">11.</span>
 
-      <div class="title">Over… But <small>〜 終わったはず 〜</small></div>
+    <div class="title-wrap">
+    <div class="title-track">
+    <span class="title-text">Over… But 〜 終わったはず 〜</span>
+    </div>
+    </div>
 
       <div class="time">0:00 / 3:04</div>
 
@@ -626,7 +704,11 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">12.</span>
 
-      <div class="title">Looking for you <small>〜 for kupi 〜</small></div>
+    <div class="title-wrap">
+    <div class="title-track">
+    <span class="title-text">Looking for you 🖍️</span>
+    </div>
+    </div>
 
       <div class="time">0:00 / 4:28</div>
 
@@ -649,7 +731,11 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">13.</span>
 
-      <div class="title">こんな私でもいいでしょ？ <small>〜 for kupi 〜</small></div>
+    <div class="title-wrap">
+    <div class="title-track">
+    <span class="title-text">こんな私でもいいでしょ？ 🖍️</span>
+    </div>
+    </div>
 
       <div class="time">0:00 / 3:09</div>
 
@@ -672,7 +758,11 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">14.</span>
 
-      <div class="title">こんな俺でもいいでしょ？ <small>~ Male Vocal ~</small></div>
+    <div class="title-wrap">
+    <div class="title-track">
+    <span class="title-text">こんな俺でもいいでしょ？</span>
+    </div>
+    </div>
 
       <div class="time">0:00 / 3:09</div>
 
@@ -695,7 +785,11 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">15.</span>
 
-      <div class="title">Not Over You <small>〜 君がいない 〜</small></div>
+    <div class="title-wrap">
+    <div class="title-track">
+    <span class="title-text">Not Over You 〜 君がいない 〜</span>
+    </div>
+    </div>
 
       <div class="time">0:00 / 3:04</div>
 
@@ -718,7 +812,11 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">16.</span>
 
-      <div class="title">Late Night <small>〜君のいない夜〜</small></div>
+    <div class="title-wrap">
+    <div class="title-track">
+    <span class="title-text">Late Night 〜君のいない夜〜</span>
+    </div>
+    </div>
 
       <div class="time">0:00 / 2:57</div>
 
@@ -741,7 +839,11 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">17.</span>
 
-      <div class="title">まだ君を探してる</div>
+    <div class="title-wrap">
+    <div class="title-track">
+    <span class="title-text">まだ君を探してる</span>
+    </div>
+    </div>
 
       <div class="time">0:00 / 3:51</div>
 
@@ -764,7 +866,11 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">18.</span>
 
-      <div class="title">あの夏の風 <small>~ In my Memory ~</small></div>
+    <div class="title-wrap">
+    <div class="title-track">
+    <span class="title-text">あの夏の風 ~ In my Memory ~</span>
+    </div>
+    </div>
 
       <div class="time">0:00 / 4:13</div>
 
@@ -787,7 +893,11 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">19.</span>
 
-      <div class="title">ねぇ… <small>〜 for kupi 〜</small></small></div>
+    <div class="title-wrap">
+    <div class="title-track">
+    <span class="title-text">ねぇ… 🖍️</span>
+    </div>
+    </div>
 
       <div class="time">0:00 / 2:30</div>
 
@@ -811,7 +921,11 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">20.</span>
 
-      <div class="title">桜が散る前に</small></small></div>
+    <div class="title-wrap">
+    <div class="title-track">
+    <span class="title-text">桜が散る前に</span>
+    </div>
+    </div>
 
       <div class="time">0:00 / 2:59</div>
 
@@ -834,7 +948,11 @@ animation-delay:0.4s;
     <div class="row">
     <span class="track-num">21.</span>
 
-      <div class="title">湾岸Night</small></small></div>
+    <div class="title-wrap">
+    <div class="title-track">
+    <span class="title-text">湾岸Night</span>
+    </div>
+    </div>
 
       <div class="time">0:00 / 2:27</div>
 
@@ -1036,6 +1154,46 @@ tracks.forEach(track => {
 
 });
 
+(function () {
+  function setupScroll() {
+    document.querySelectorAll(".title-wrap").forEach(wrap => {
+      const track = wrap.querySelector(".title-track");
+      const textEl = track?.querySelector(".title-text");
+      if (!track || !textEl) return;
+
+      const text = textEl.textContent.trim();
+
+      // 1個表示に見せつつ、裏で複製してループ
+      track.innerHTML = `
+        <span class="title-text">${text}</span>
+        <span class="title-gap"></span>
+        <span class="title-text">${text}</span>
+      `;
+
+      const firstText = track.querySelector(".title-text");
+      const gapEl = track.querySelector(".title-gap");
+
+      const wrapWidth = Math.ceil(wrap.getBoundingClientRect().width);
+      const textWidth = Math.ceil(firstText.getBoundingClientRect().width);
+
+      // 短いタイトルは2個目が見えないように、画面幅ぶん近く空白を入れる
+      const gap = Math.max(32, wrapWidth - textWidth + 32);
+      gapEl.style.width = `${gap}px`;
+
+      const distance = textWidth + gap;
+      track.style.setProperty("--marquee-distance", `${distance}px`);
+
+      const duration = Math.max(6, distance / 45);
+      track.style.setProperty("--marquee-duration", `${duration}s`);
+    });
+  }
+
+  window.addEventListener("load", () => {
+    requestAnimationFrame(setupScroll);
+  });
+
+  window.addEventListener("resize", setupScroll);
+})();
 
 
 </script>
